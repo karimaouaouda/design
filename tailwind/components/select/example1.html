@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page</title>
+</head>
+<body>
+    <div class="app w-screen flex flex-col justify-center items-center h-screen bg-slate-200">
+        <div x-data="{
+            open : false,
+            selectedCode : 'DZ',
+            selectedCountry : 'Algeria'
+        }"
+        x-init="$watch('selectedCode' , value => open = false)"
+        x-bind:class="{'rounded-b-lg' : !open}"
+         class="select-box w-full sm:w-2/3 md:w-1/3    rounded-t-lg bg-sky-500 p-2 h-12 relative">
+            <div id="select" class="select w-full h-full text-slate-200 font-normal
+            ">
+                <div x-on:click="open = !open" class="selectd-box cursor-pointer text-xl flex items-center justify-between w-full h-full">
+                    <div class="left flex">
+                        <div class="icon text-2xl mx-2">
+                            <i class="bi bi-list"></i>
+                        </div>
+                        <span class="chosen flex items-center" x-text="selectedCountry">
+                            
+                        </span>
+                    </div>
+                    <div class="right  h-full">
+                        <img x-bind:src="'https://flagsapi.com/'+selectedCode+'/shiny/64.png'" class=" h-full">
+                    </div>
+                </div>
+                <div x-bind:class="{ 'hidden': !open }" class="options rounded-b-lg absolute bg-sky-500 py-2 top-full w-full left-0">
+                    <div x-on:click="selectedCode = code ; selectedCountry = country" x-bind:class="{'hidden' : code == selectedCode}" x-data="{code : 'FR' , country : 'France'}" class="option px-2 py-1  cursor-pointer text-xl flex items-center justify-start h-10 hover:bg-sky-400 duration-300 ease-in-out">
+                        <div class="left h-full flex">
+                            <div class="icon mx-2 h-full">
+                                <img class=" h-full" x-bind:src="'https://flagsapi.com/'+code+'/shiny/64.png'">
+                            </div>
+                            <span class="chosen flex items-center" x-text="country">
+                            </span>
+                        </div>
+                    </div>
+                    <div x-on:click="selectedCode = code ; selectedCountry = country" x-bind:class="{'hidden' : code == selectedCode}" x-data="{code : 'DZ' , country : 'Algeria'}"
+                        class="option px-2 py-1  cursor-pointer text-xl flex items-center justify-start h-10 hover:bg-sky-400 duration-300 ease-in-out">
+                        <div class="left h-full flex">
+                            <div class="icon mx-2 h-full">
+                                <img class=" h-full" src="https://flagsapi.com/DZ/shiny/64.png">
+                            </div>
+                            <span class="chosen flex items-center ">
+                                Algeria
+                            </span>
+                        </div>
+                    </div>
+                    <div x-on:click="selectedCode = code ; selectedCountry = country" x-bind:class="{'hidden' : code == selectedCode}" x-data="{code : 'JP' , country : 'Japan'}"
+                        class="option px-2 py-1  cursor-pointer text-xl flex items-center justify-start h-10 hover:bg-sky-400 duration-300 ease-in-out">
+                        <div class="left h-full flex">
+                            <div class="icon mx-2 h-full">
+                                <img x-bind:src="'https://flagsapi.com/'+code+'/shiny/64.png'" class=" h-full">
+                            </div>
+                            <span class="chosen flex items-center" x-text="country">
+                                
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            try some
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
