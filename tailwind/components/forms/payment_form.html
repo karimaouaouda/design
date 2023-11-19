@@ -11,22 +11,30 @@
             font-family: "rubik";
         }
     </style>
+    
     <title>payment form</title>
 </head>
 <body>
-    <div 
-    class="app bg-gray-200 w-screen min-h-screen">
+    <div x-data="{
+        showModel : false
+    }"
+    :class="{
+        'min-h-screen' : !showModel,
+        'h-screen overflow-hidden' : showModel
+    }"
+    class="app bg-gray-200 w-screen">
         <div class="app-inner w-full min-h-screen flex justify-center items-center">
-            <div class="form-box p-2 bg-[#f5f5f5] drop-shadow-md w-2/3 rounded-lg  ">
-                <form :data-selected="selected || 'none'" x-data="{isSelected : false, selected : null}" action="" onsubmit="false" id="form" 
+            <div class="form-box p-2 bg-[#f5f5f5] drop-shadow-md w-full xs:w-4/5 mx-2 sm:w-4/5 md:w-3/5 lg:w-2/5 rounded-lg  ">
+                <form :data-selected="selected || 'none'" 
+                x-data="{isSelected : false, selected : null, errors : []}" action="" onsubmit="false" id="form" 
                 class="w-full p-2">
                     <div class="form-title w-full">
                         <h6 class="text-center font-medium text-2xl text-sky-500">
                             Easiest Way To Pay
                         </h6>
                     </div>
-                    <div class="form-error text-center bg-red-500 text-white px-1 py-2 mt-4">
-                        <span >
+                    <div x-show="errors.length > 0" class="form-error text-center bg-red-500 text-white px-1 py-2 mt-4 w-full lg:w-4/5 mx-auto">
+                        <span>
                             request doesn't handled corectly
                         </span>
                     </div>
@@ -47,7 +55,7 @@
                             class="select-box drop-shadow-lg mt-2 mx-auto w-full sm:w-2/3 md:w-1/3 rounded-t-lg p-2 h-12 relative">
                             <div id="select" class="select w-full h-full  font-normal mx-auto
                                     ">
-                                <div x-on:click="open = !open"
+                                <div @click="open = !open"
                                      :class="{
                                          'text-sky-500' : !open,
                                          'text-slate-200' : open
@@ -73,7 +81,7 @@
                                         ] }"
                                     class="options text-slate-200 rounded-b-lg absolute bg-sky-500 py-2 top-full w-full left-0">
                                     <template x-for="coun in countries">
-                                        <div x-on:click="selectedCode = code ; selectedCountry = country" :class="{'hidden' : code == selectedCode}"
+                                        <div @click="selectedCode = code ; selectedCountry = country" :class="{'hidden' : code == selectedCode}"
                                             x-data="{code : coun.code , country : coun.country}"
                                             class="option px-2 py-1  cursor-pointer text-xl flex items-center justify-start h-10 hover:bg-sky-400 duration-300 ease-in-out">
                                             <div class="left h-full flex">
@@ -91,10 +99,9 @@
                     </div>
                     <div x-data="{
                         localmethods : [
-                            {name : 'paypal'},
-                            {name : 'masterpass'},
-                            {name : 'wise'},
-                            {name : 'visa'}
+                            {name : 'zain' , ext : 'png'},
+                            {name : 'masterpass', ext : 'svg'},
+                            {name : 'wise', ext : 'svg'},
                         ],
                         worldmethods : [
                             {name : 'paypal'},
@@ -106,14 +113,14 @@
                                 local methods : 
                             </span>
                         </div>
-                        <div class="container flex flex-wrap justify-around">
+                        <div class="container flex flex-wrap justify-center">
                             <template x-for="meth in localmethods">
                                 <div :class="{'bg-[#f5f5f5]' : selected == null, 'bg-white border border-sky-500' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
-                                    x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
+                                    @click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
                                     x-init="$watch('selected', value => IAmSelected = value == null ? false : (selected == method ? true : false) )"
                                     x-data="{method : meth.name , iAmSelected : false}"
-                                    class="option mt-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
-                                    <img class="w-full h-full" :src="'./../../../assets/media/' +meth.name +'.svg'" alt="">
+                                    class="option m-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
+                                    <img class="w-full h-full" :src="'./../../../assets/media/' +meth.name +'.'+meth.ext" alt="">
                                 </div>
                             </template>
                         </div>
@@ -123,13 +130,13 @@
                             </span>
                         </div>
                         <div class="worldwide-methods">
-                            <div class="container flex flex-wrap justify-around">
+                            <div class="container flex flex-wrap justify-center">
                                 <template x-for="meth in worldmethods">
                                     <div :class="{'bg-[#f5f5f5]' : selected == null, 'bg-white border border-sky-500' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
-                                        x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
+                                        @click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
                                         x-init="$watch('selected', value => IAmSelected = value == null ? false : (selected == method ? true : false) )"
                                         x-data="{method : meth.name , iAmSelected : false}"
-                                        class="option mt-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
+                                        class="option m-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
                                         <img class="w-full h-full" :src="'./../../../assets/media/' +meth.name +'.svg'" alt="">
                                     </div>
                                 </template>
@@ -137,8 +144,9 @@
                         </div>
                     </div>
                     <div class="continue text-center mt-4">
-                        <button
+                        <button type="button"
                         :disabled="selected == null"
+                        @click="showModel = true; console.log(selected)"
                         :class="{
                             'bg-sky-400 hover:bg-sky-500' : selected,
                             'bg-sky-300 cursor-not-allowed' : !selected
@@ -150,8 +158,71 @@
                 </form>
             </div>
         </div>
+
+        <div x-show="showModel" x-transition.500ms
+        class="absolute w-full flex px-2 h-full top-0 left-0" style="z-index: 999;">
+            <div class="absolute top-0 left-0 w-full h-full bg-black opacity-30"></div>
+            <div class="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 p-2 m-auto bg-[#f5f5f5] opacity-100 rounded-lg" style="z-index: 999;">
+                <h6 class="w-full text-center text-xl pt-4 pb-2 capitalize font-light">
+                    account informaions
+                </h6>
+                <p class="p-2 mx-auto w-full lg:w-4/5 text-xs lg:text-sm text-left border bg-slate-200 text-slate-700">
+                    <i class="bi bi-info-circle mx-1"></i> this is account information linked to : <span>zain</span> transfer the amount : 17$ the upload the preuve then click done , after payment confirmation we will notify you soon as possible
+                </p>
+                <p class="p-2 mx-auto w-full lg:w-4/5 text-xs lg:text-sm text-left border bg-red-400 text-white my-2" >
+                    <i class="bi bi-slash-square mx-1"></i> any attempt to cheat or defraud you will be permanently banned from using our website and judicial actions will be followed
+                </p>
+                <div class="info-inpt w-full py-1 my-2">
+                    <div
+                    class="relative w-full sm:w-4/5 bg-slate-400 h-10 mx-auto flex rounded-lg overflow-hidden">
+                        <i class="bi bi-person-vcard h-full bg-slate-300 leading-10 basis-[12%] text-center text-xl"></i>
+                        <input readonly value="Karim Aouaouda" type="text" 
+                        class="h-full outline-none basis-[88%] px-4 text-center text-slate-500 font-bold leading-wider">
+                    </div>
+                </div>
+                <div class="info-inpt w-full py-1 my-2">
+                    <div class="relative w-full sm:w-4/5 bg-slate-400 h-10 mx-auto flex rounded-lg overflow-hidden">
+                        <i class="bi bi-credit-card-2-front h-full bg-slate-300 leading-10 basis-[12%] text-center text-xl"></i>
+                        <input readonly value="+213655766709" type="text"
+                            class="h-full outline-none basis-[88%] px-4 text-center text-slate-500 font-bold leading-wider">
+                    </div>
+                </div>
+                <div class="slipper h-[1px] bg-slate-400 w-full lg:w-4/5 mx-auto"></div>
+                <form action="">
+                    <div class="input-box">
+                        <div class="info-inpt w-full py-1 my-2">
+                            <div class="relative w-full sm:w-4/5 bg-slate-400 h-10 mx-auto flex rounded-lg overflow-hidden">
+                                <i class="bi bi-pencil-square h-full bg-slate-300 leading-10 basis-[12%] text-center text-xl"></i>
+                                <input placeholder="transaction number" type="text"
+                                    class="h-full placeholer:font-medium placeholder:text-slate-300 text-slate-700 outline-none basis-[88%] px-4 text-center text-slate-500 font-bold leading-wider">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <div class="info-inpt w-full py-1 my-2">
+                            <div class="relative w-full sm:w-4/5 h-10 mx-auto flex rounded-lg overflow-hidden">
+                                
+                                <input placeholder="transaction number" type="file"
+                                    class="h-full placeholer:font-medium placeholder:text-slate-300 text-slate-700 outline-none basis-[88%] px-4 text-center text-slate-500 font-bold leading-wider">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="py-4 text-center">
+                        <button type="button" class="p-2 bg-green-400 hover:bg-green-500 text-white rounded-lg drop-shadow-md">
+                            done and pay
+                        </button>
+                        <button @click="showModel = false" type="button" class="text-white bg-red-400 drop-shadow-md p-2 rounded-lg hover:bg-red-500 ml-4">
+                            cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        document.addEventListener('alpine:init' , init);
+    </script>
 </body>
 </html>
