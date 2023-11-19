@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+        *{
+            font-family: "rubik";
+        }
+    </style>
+    <title>payment form</title>
+</head>
+<body>
+    <div 
+    class="app bg-gray-200 w-screen min-h-screen">
+        <div class="app-inner w-full min-h-screen flex justify-center items-center">
+            <div class="form-box p-2 bg-[#f5f5f5] drop-shadow-md w-2/3 rounded-lg  ">
+                <form :data-selected="selected || 'none'" x-data="{isSelected : false, selected : null}" action="" onsubmit="false" id="form" 
+                class="w-full p-2">
+                    <div class="form-title w-full">
+                        <h6 class="text-center font-medium text-2xl text-sky-500">
+                            Easiest Way To Pay
+                        </h6>
+                    </div>
+                    <div class="form-error text-center bg-red-500 text-white px-1 py-2 mt-4">
+                        <span >
+                            request doesn't handled corectly
+                        </span>
+                    </div>
+                    <div class="select-box mt-2" style="z-index: 999;">
+                        <label for="country">
+                            chose country :
+                        </label>
+                        <div x-data="{
+                                    open : false,
+                                    selectedCode : 'DZ',
+                                    selectedCountry : 'Algeria'
+                                }" style="z-index: 999;"
+                                :class="{
+                                    'bg-sky-500' : open,
+                                    'bg-[#f5f5f5] rounded-b-lg' : !open
+                                }" x.transition.300ms
+                                x-init="$watch('selectedCode' , value => open = false)" :class="{'rounded-b-lg' : !open}"
+                            class="select-box drop-shadow-lg mt-2 mx-auto w-full sm:w-2/3 md:w-1/3 rounded-t-lg p-2 h-12 relative">
+                            <div id="select" class="select w-full h-full  font-normal mx-auto
+                                    ">
+                                <div x-on:click="open = !open"
+                                     :class="{
+                                         'text-sky-500' : !open,
+                                         'text-slate-200' : open
+                                     }"
+                                    class="selectd-box  text-sky-500 cursor-pointer text-xl flex items-center justify-between w-full h-full">
+                                    <div class="left flex">
+                                        <div class="icon text-2xl mx-2">
+                                            <i class="bi bi-list"></i>
+                                        </div>
+                                        <span class="chosen flex items-center " x-text="selectedCountry">
+                        
+                                        </span>
+                                    </div>
+                                    <div class="right  h-full">
+                                        <img :src="'https://flagsapi.com/'+selectedCode+'/shiny/64.png'" class=" h-full">
+                                    </div>
+                                </div>
+                                <div x-show="open" x-transition.300ms
+                                    x-data="{ countries : [
+                                            {code : 'DZ' , country : 'Algeria'},
+                                            {code : 'FR' , country : 'France'},
+                                            {code : 'JP' , country : 'Japan'}
+                                        ] }"
+                                    class="options text-slate-200 rounded-b-lg absolute bg-sky-500 py-2 top-full w-full left-0">
+                                    <template x-for="coun in countries">
+                                        <div x-on:click="selectedCode = code ; selectedCountry = country" :class="{'hidden' : code == selectedCode}"
+                                            x-data="{code : coun.code , country : coun.country}"
+                                            class="option px-2 py-1  cursor-pointer text-xl flex items-center justify-start h-10 hover:bg-sky-400 duration-300 ease-in-out">
+                                            <div class="left h-full flex">
+                                                <div class="icon mx-2 h-full">
+                                                    <img class=" h-full" :src="'https://flagsapi.com/'+coun.code+'/shiny/64.png'">
+                                                </div>
+                                                <span class="chosen flex items-center" x-text="coun.country">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div x-data="{
+                        localmethods : [
+                            {name : 'paypal'},
+                            {name : 'masterpass'},
+                            {name : 'wise'},
+                            {name : 'visa'}
+                        ],
+                        worldmethods : [
+                            {name : 'paypal'},
+                            {name : 'visa'}
+                        ]
+                    }" class="methods mt-2">
+                        <div>
+                            <span>
+                                local methods : 
+                            </span>
+                        </div>
+                        <div class="container flex flex-wrap justify-around">
+                            <template x-for="meth in localmethods">
+                                <div :class="{'bg-[#f5f5f5]' : selected == null, 'bg-white border border-sky-500' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
+                                    x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
+                                    x-init="$watch('selected', value => IAmSelected = value == null ? false : (selected == method ? true : false) )"
+                                    x-data="{method : meth.name , iAmSelected : false}"
+                                    class="option mt-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
+                                    <img class="w-full h-full" :src="'./../../../assets/media/' +meth.name +'.svg'" alt="">
+                                </div>
+                            </template>
+                        </div>
+                        <div class="slipper my-8 h-[1px] w-full text-center bg-gray-300 relative">
+                            <span class="bg-[#f5f5f5] relative inline-block h-[1.5rem]" style="top : -0.78rem ">
+                                or use 
+                            </span>
+                        </div>
+                        <div class="worldwide-methods">
+                            <div class="container flex flex-wrap justify-around">
+                                <template x-for="meth in worldmethods">
+                                    <div :class="{'bg-[#f5f5f5]' : selected == null, 'bg-white border border-sky-500' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
+                                        x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
+                                        x-init="$watch('selected', value => IAmSelected = value == null ? false : (selected == method ? true : false) )"
+                                        x-data="{method : meth.name , iAmSelected : false}"
+                                        class="option mt-2 drop-shadow-md cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
+                                        <img class="w-full h-full" :src="'./../../../assets/media/' +meth.name +'.svg'" alt="">
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="continue text-center mt-4">
+                        <button
+                        :disabled="selected == null"
+                        :class="{
+                            'bg-sky-400 hover:bg-sky-500' : selected,
+                            'bg-sky-300 cursor-not-allowed' : !selected
+                        }"
+                        class="p-2 text-white rounded-lg ">
+                            continue
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>

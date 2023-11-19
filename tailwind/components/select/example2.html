@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-        integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>karim aouaouda</title>
 </head>
 <body>
@@ -16,7 +15,7 @@
                 chose method to pay with :
             </h6>
         </div>
-        <div x-bind:data-selected="selected || 'none'" x-data="{isSelected : false, selected : null}" class="w-full bg-sky-500 p-2 rounded-lg">
+        <div x-bind:data-selected="selected || 'none'" x-data="{isSelected : false, selected : null}" class="w-full bg-sky-300 p-2 rounded-lg">
             <div class="container flex flex-wrap justify-start">
                 <div x-bind:class="{'bg-sky-200' : selected == null, 'bg-white' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }" 
                 x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;" 
@@ -24,7 +23,7 @@
                 
                 x-data="{method : 'paypal' , iAmSelected : false}" 
                 class="option m-2 cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
-                    <img class="w-full h-full" src="./assets/media/paypal.svg" alt="">
+                    <img class="w-full h-full" src="./../../../assets/media/paypal.svg" alt="">
                 </div>
                 <div x-bind:class="{'bg-sky-200' : selected == null, 'bg-white' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
                     x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
@@ -32,7 +31,7 @@
                     
                     x-data="{method : 'masterpass' , iAmSelected : false}"
                     class="option m-2 cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
-                    <img class="w-full h-full" src="./assets/media/masterpass.svg" alt="">
+                    <img class="w-full h-full" src="./../../../assets/media/masterpass.svg" alt="">
                 </div>
                 <div x-bind:class="{'bg-sky-200' : selected == null, 'bg-white' : selected == method, 'bg-gray-500' : (selected && selected != method), 'hover:bg-sky-100' : !selected }"
                     x-on:click="selected = selected? (selected == method ? null : method) : method ;iAmSelected = !iAmSelected;"
@@ -40,7 +39,7 @@
                     
                     x-data="{method : 'visa' , iAmSelected : false}"
                     class="option m-2 cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
-                    <img class="w-full h-full" src="./assets/media/visa-withoutcard.svg" alt="">
+                    <img class="w-full h-full" src="./../../../assets/media/visa-withoutcard.svg" alt="">
                 </div>
                 <div x-bind:class="{'bg-sky-200' : selected == null,
                                     'bg-white' : selected == method,
@@ -53,7 +52,7 @@
                     x-data="{method : 'wise',
                              iAmSelected : false}"
                     class="option m-2 cursor-pointer duration-150 ease-in-out hover:bg-sky-100 w-40 flex p-4 justify-center items-center p-2  rounded-lg h-16">
-                    <img class="w-full h-full" src="./assets/media/wise.svg" alt="">
+                    <img class="w-full h-full" src="./../../../assets/media/wise.svg" alt="">
                 </div>
             </div>
         </div>
