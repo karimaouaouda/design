@@ -18,35 +18,43 @@
 </head>
 
 <body>
-    <div class="app bg-sky-500 w-screen h-screen">
-        <div class="inner-app relative w-full h-full flex justify-center items-center">
+    <div class="app bg-sky-500 w-screen min-h-screen overflow-x-hidden">
+        <div class="inner-app relative w-full h-full py-4 flex justify-center items-center">
             <div class="form-container w-4/5 bg-[#f5f5f5] rounded-lg p-2">
                 <form action="">
                     <div class="form-header py-2 text-center text-xl font-medium capitalize">
-                        login
+                        register
                     </div>
                     <div class="form-errors my-2"></div>
                     <div class="inputs">
                         <div class="inpt my-4 w-full">
                             <div class="hi m-auto w-4/5 relative">
-                                <label for="username" class="block text-gray-500">email/username:</label>
-                                <input id="username" placeholder="username..." type="text"
+                                <label for="username" class="block text-gray-500">name:</label>
+                                <input id="username" placeholder="name..." type="text"
                                     class="border-b border-l bg-transparent focus:bg-white border-sky-300 focus:border focus:border-sky-500 duration-150 ease-in-out outline-none h-10 px-4 w-full">
-                                    <i class="bi bi-eye absolute right-2 top-1/2"></i>
                             </div>
                         </div>
                         <div class="inpt my-4 w-full">
-                            <div class="hi m-auto w-4/5">
-                                <label for="password" class="block text-gray-500">password:</label>
-                                <input id="password" placeholder="password..." type="password"
+                            <div class="hi m-auto w-4/5 relative">
+                                <label for="username" class="block text-gray-500">email:</label>
+                                <input id="username" placeholder="email..." type="email"
                                     class="border-b border-l bg-transparent focus:bg-white border-sky-300 focus:border focus:border-sky-500 duration-150 ease-in-out outline-none h-10 px-4 w-full">
                             </div>
                         </div>
+                        <div class="inpt my-4 w-full">
+                            <div class="hi m-auto w-4/5 relative">
+                                <label for="username" class="block text-gray-500">password:</label>
+                                <input id="username" placeholder="password..." type="password"
+                                    class="border-b border-l bg-transparent focus:bg-white border-sky-300 focus:border focus:border-sky-500 duration-150 ease-in-out outline-none h-10 px-4 w-full">
+                                <i class="bi bi-eye absolute right-2 top-1/2"></i>
+                            </div>
+                        </div>
                         <div class="text-center uppercase text-gray-500 font-bold ">
-                            or connect use
+                            or register use
                         </div>
                         <div class="buttons py-2 w-full flex flex-col items-center">
-                            <button class="bg-black my-2 hover:bg-white uppercase border border-black hover:text-black duration-300 ease-in-out text-white w-3/5 py-2 rounded-lg ">
+                            <button
+                                class="bg-black my-2 hover:bg-white uppercase border border-black hover:text-black duration-300 ease-in-out text-white w-3/5 py-2 rounded-lg ">
                                 <i class="bi bi-github mr-2"></i>
                                 github
                             </button>
@@ -55,11 +63,12 @@
                                 <i class="bi bi-facebook mr-2"></i>
                                 facebook
                             </button>
-                            <button class="bg-white my-2 font-medium uppercase border border-sky-500 duration-300 ease-in-out text-sky-500 w-3/5 py-2 rounded-lg ">
+                            <button
+                                class="bg-white my-2 font-medium uppercase border border-sky-500 duration-300 ease-in-out text-sky-500 w-3/5 py-2 rounded-lg ">
                                 <i class="bi bi-google mr-2"></i>
                                 google
                             </button>
-                            
+
                         </div>
                     </div>
                     <div class="text-center my-4 w-4/5 mx-auto flex flex-col items-center justify-center">
@@ -69,7 +78,7 @@
                             login
                         </button>
                         <span class="text-sm mt-4">
-                            havn't an account? <a href="./register-form1.html" class="font-medium text-sky-500">register</a> now !
+                            already have an account? <a href="./login_form1.html" class="font-medium text-sky-500">login</a> now !
                         </span>
                     </div>
                 </form>
